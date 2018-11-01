@@ -7,9 +7,9 @@
  */
 
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, Text, WebView, FlatList } from 'react-native';
+import { View, StyleSheet, Dimensions, Text, WebView, ScrollView, FlatList } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import { ListItem, ThemeProvider, Button } from 'react-native-elements';
+import { ListItem, List, ThemeProvider, Button } from 'react-native-elements';
 
 
 const list = [
@@ -49,73 +49,106 @@ const list = [
     kind: '정치',
     contents: '문 대통령은 이날 오후 자신의 페이스북에 글을 올려 "인도 모디 총리께서 멋진 옷을 보내왔다"며 "인도 전통의상을 한국에서도 쉽게 입을 수 있도록 개량한 모디 재킷인데, 너무 잘 맞는다"고 고마움을 표시했다.'
   },
+  {
+    title: '10월 수출 550억달러…6개월 연속 500억달러 넘어 (종합)',
+    date: '2018-11-01 12:11',
+    kind: '경제',
+    contents: '10월 수출이 549억7000만달러로 지난해 같은 기간과 비교해 22.7% 늘어난 것으로 나타났다. 추석 연휴 효과에다 반도체, 석유화학, 기계류 등의 수출이 호조를 보였기 때문이다. 지난해 5월 이후 6개월 연속 수출이 500억달러를 넘기게 됐다.'
+  },
+  {
+    title: 'KT 10기가 인터넷에 ‘맞불’ SKB “우리도 한다”',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    date: '2018-10-31 14:46',
+    kind: 'IT/과학',
+    contents: '31일 KT는 서울 종로구 광화문 KT스퀘어에서 기자간담회를 열고 서울 및 6대 광역시를 비롯해 전국 주요 도시에 최고 10Gbps 속도의 10기가 인터넷을 서비스한다고 밝혔다. '
+  },
+  {
+    title: '모디 재킷 선물받은 文대통령 너무 잘 맞아···후의에 감사',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    date: '2018-10-31 17:10',
+    kind: '정치',
+    contents: '문 대통령은 이날 오후 자신의 페이스북에 글을 올려 "인도 모디 총리께서 멋진 옷을 보내왔다"며 "인도 전통의상을 한국에서도 쉽게 입을 수 있도록 개량한 모디 재킷인데, 너무 잘 맞는다"고 고마움을 표시했다.'
+  },
+  {
+    title: '10월 수출 550억달러…6개월 연속 500억달러 넘어 (종합)',
+    date: '2018-11-01 12:11',
+    kind: '경제',
+    contents: '10월 수출이 549억7000만달러로 지난해 같은 기간과 비교해 22.7% 늘어난 것으로 나타났다. 추석 연휴 효과에다 반도체, 석유화학, 기계류 등의 수출이 호조를 보였기 때문이다. 지난해 5월 이후 6개월 연속 수출이 500억달러를 넘기게 됐다.'
+  }
 ]
 
-
 // 첫 번째 탭
- const FirstRoute = () => (
-   <View style={[styles.container, { backgroundColor: '#f4f4f4' }]} >
-     <WebView source={{uri: 'https://google.com'}}/>
-   </View>
- );
+const FirstRoute = () => (
+  <View style={[styles.container, { backgroundColor: '#ffffff' }]} >
+    <WebView source={{uri: 'https://google.com'}}/>
+  </View>
+);
 
 // 두 번째 탭
- const SecondRoute = () => (
-   <View style={[styles.container_1,     // 탭 내부의 스타일
-   { backgroundColor: '#f4f4f4' }]} >
-     <View>
-      {
-    list.map((l, i) => (
-      <ListItem
-        key={i}
-        leftAvatar={{ source: { uri: l.avatar_url } }}
-        title={l.title}
-        subtitle={
-          <View>
-            <Text style={styles.date}>{l.date} | <Text style={styles.kind}>{l.kind}</Text></Text>
-            <Text numberOfLines={2} style={styles.container_1}>{l.contents}</Text>
-          </View>
+const SecondRoute = () => (   
+  <View style={[styles.container, { backgroundColor: '#ffffff' }]} >
+    <View style={{flex: 1}}>
+      <ScrollView>
+        {
+          list.map((l, i) => (
+            <ListItem
+              containerStyle={{ backgroundColor: '#ffffff' }}
+              key={i}
+              leftAvatar={{ source: { uri: l.avatar_url } }}
+              title={l.title}
+              subtitle={
+                <View>
+                  <Text style={styles.date}>{l.date} | {l.kind}</Text>
+                  <Text numberOfLines={2} style={styles.container_1}>{l.contents}</Text>
+                </View>
+              }
+            />
+          ))
         }
-      />
-    ))
-      }
-     </View>
-   </View>
- );
+      </ScrollView>
+    </View>
+  </View>
+);
 
 // 세 번째 탭
- const ThirdRoute = () => (
-   <View style={[styles.container, { backgroundColor: '#e0e0e8' }]} />
- );
+const ThirdRoute = () => (
+  <View style={[styles.container, { backgroundColor: '#ffffff' }]} >
+  </View>
+);
 
- export default class TabViewExample extends React.Component {
-   state = {
-     index: 1,  // 첫 탭
-     routes: [
-       { key: 'first', title: 'Web' },   // title : 라벨
-       { key: 'second', title: 'List' },
-       { key: 'third', title: 'Third' },
-     ],
-   };
 
-   render() {
-     return (
-       <TabView                         // 탭 뷰 선언
-         navigationState={this.state}
-         renderScene={SceneMap({
-           first: FirstRoute,
-           second: SecondRoute,
-           third: ThirdRoute,
-         })}
-         onIndexChange={index => this.setState({ index })}
-         initialLayout={{
-                         width: Dimensions.get('window').width,   //
-                         height: Dimensions.get('window').height,
-                          }}
-       />
-     );
-   }
- }
+
+// 기본 컴포넌트 뷰
+export default class TabViewExample extends React.Component {
+  state = {
+    index: 1,  // 첫 탭
+    routes: [
+      { key: 'first', title: 'Web' },   // title : 라벨
+      { key: 'second', title: 'List' },
+      { key: 'third', title: 'DETAIL' },
+    ],
+  };
+   
+  render() {
+    return (
+      <TabView                         // 탭 뷰 선언
+        navigationState={this.state}
+        renderScene={
+          SceneMap({
+          first: FirstRoute,
+          second: SecondRoute,
+          third: ThirdRoute,
+        })}
+        onIndexChange={index => this.setState({ index })}
+        initialLayout=
+        {{
+          width: Dimensions.get('window').width,
+          height: Dimensions.get('window').height,
+        }}
+      />
+    );
+  }
+}
 
 
 const styles = StyleSheet.create({  // styles 라는 객체 생성
@@ -132,22 +165,12 @@ const styles = StyleSheet.create({  // styles 라는 객체 생성
   kind: {
     textAlign: 'right',
   },
-
   container_1: {
     paddingLeft: 10,
-    paddingRight: 15,
     height: 40,
+    backgroundColor: '#ffffff',
+    flex: 1
   },
   in_container: {
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
