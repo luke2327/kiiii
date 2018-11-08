@@ -195,22 +195,23 @@ const ThirdRoute = () => (
   </View>
 );
 
+// 네 번째 탭
 const FourthRoute = () => (
   <View>
     <ScrollView>
-    <Tile
-  imageSrc={require('./static/img/bu.jpg')}
-  title="Lorem ipsum dolor sit amet, consectetur"
-  icon={{ name: 'play-circle', type: 'font-awesome' }} // optional
-  contentContainerStyle={{ height: 70 }}
->
-  <View
-    style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}
-  >
-    <Text>Caption</Text>
-    <Text>Caption</Text>
-  </View>
-</Tile>
+      <Tile
+        imageSrc={require('./static/img/bu.jpg')}
+        title="Lorem ipsum dolor sit amet, consectetur"
+        icon={{ name: 'play-circle', type: 'font-awesome' }} // optional
+        contentContainerStyle={{ height: 70 }}
+      >
+        <View
+          style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}
+        >
+          <Text>Caption</Text>
+          <Text>Caption</Text>
+        </View>
+      </Tile>
 <View style={{height: 40}}></View>
 <Tile
   imageSrc={require('./static/img/bu.jpg')}
